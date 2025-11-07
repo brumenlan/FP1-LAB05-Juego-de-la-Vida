@@ -9,8 +9,16 @@ def crear_tablero(filas: int, columnas: int) -> list[list[bool]]:
     Devuelve:
         Una lista de listas con todos los elementos False.
     """
-    # TODO: Ejercicio 1
-    pass
+    return [[False for _ in range(columnas)] for _ in range(filas)]
+
+'''
+    fila_f = []
+    tablero = []
+    for c in range(columnas):
+        fila_f.append(False)
+    for f in range(filas):
+        tablero.append(fila_f)
+    return tablero'''
 
 def crear_tablero_aleatorio(filas: int, columnas: int, probabilidad_vida: float) -> list[list[bool]]:
     """
@@ -25,8 +33,17 @@ def crear_tablero_aleatorio(filas: int, columnas: int, probabilidad_vida: float)
     Devuelve:
         Una lista de listas que representa el tablero con células vivas (True) y muertas (False).
     """
-    # TODO: Ejercicio 2
-    pass
+    fila_f = []
+    tablero = []
+
+    for c in range(columnas):
+        if random.random() < probabilidad_vida:
+            fila_f.append(True)
+        else:
+            fila_f.append(False)
+    for f in range(filas):
+        tablero.append(fila_f)
+    return tablero
 
 def insertar_patron(tablero: list[list[bool]], patron: list[list[bool]], pos_fila: int, pos_col: int):
     """
@@ -37,8 +54,19 @@ def insertar_patron(tablero: list[list[bool]], patron: list[list[bool]], pos_fil
         pos_fila (int): La fila en la que se insertará la esquina superior izquierda del patrón.
         pos_col (int): La columna en la que se insertará la esquina superior izquierda del patrón.
     """
-    # TODO: Ejercicio 3
-    pass
+    filas_tablero = len(tablero)
+    columnas_tablero = len(tablero[0])
+    filas_patron = len(patron)
+    columnas_patron = len(patron[0])
+
+    for i in range(filas_patron):
+        for j in range(columnas_patron):
+            fila_destino = pos_fila + i
+            col_destino = pos_col + j
+
+            # Evitar escribir fuera del tablero
+            if 0 <= fila_destino < filas_tablero and 0 <= col_destino < columnas_tablero:
+                tablero[fila_destino][col_destino] = patron[i][j]
 
 def contar_vecinos(tablero: list[list[bool]], fila: int, col: int) -> int:
     """
